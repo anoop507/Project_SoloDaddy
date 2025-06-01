@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <video class="input_video" autoplay playsinline style=""></video> <!-- This element is acts as an input -->
+        <canvas class="output_canvas"  width="640" height="480"></canvas> <!-- This element renders the video element with annotations with it -->
+        <div class="displayMode">MODE: PREDICT</div>
+        <!-- These buttons are for enable and stop functionailty of the webcam -->
+        <div class="buttons">
+            <button id="enable" onclick="enableCam()">ENABLE</button> 
+            <button id="disable" onclick="disableCam()">DISABLE</button>
+            <button id="capture" onclick="ClickedCapture()">CAPTURE</button>
+            <button id="download" onclick="downloadDataset()">DOWNLOAD THE DATA</button>
+        </div>
+        <div class="gestureText displayMode">GESTURE: </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/ml5@0.12.2/dist/ml5.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0/dist/tf.min.js"></script>
+    <script src="main.js"></script>
+</body>
+<style>
+    body {
+        background-color: black;
+    }
+    .output_canvas {
+	  	border: 2px solid red;
+    }
+    .displayMode {
+	  	border: 2px solid red;
+        color: white;
+		width: 150px;
+	  	margin: 5px 0;
+	}
+	.buttons {
+		display: flex;
+	  	flex-direction: row;
+	}
+	button {
+		margin: 5px
+	}
+    .labelName {
+        margin: 5px 0;
+    }
+</style>
+</html>
