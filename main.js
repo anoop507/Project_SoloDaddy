@@ -158,8 +158,8 @@ async function predictGesture(sequence) {
     const prediction = model.predict(inputTensor);
 
     // Checking the softmax probabilities
-    const predictionData = await prediction.data();
-    console.log("Prediction data:", Array.from(predictionData));
+    // const predictionData = await prediction.data();
+    // console.log("Prediction data:", Array.from(predictionData));
 
     const predictedIndex = (await prediction.argMax(-1).data())[0];
 
