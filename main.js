@@ -91,7 +91,7 @@ function captureFrame(landmarks) {
   RecordSequence.push(frame);
 
   if (RecordSequence.length === FRAME_LIMIT) {
-    const label = prompt("Enter a label for this gesture:").toLowerCase();
+    const label = prompt("Enter a label for this gesture:").toUpperCase();
     collectedData.push({ label, sequence: [...RecordSequence] });
     console.log(`Saved sequence for label: ${label}`);
     RecordSequence = [];
@@ -125,17 +125,25 @@ function downloadDataset() {
   a.href = url;
   a.download = "gesture_dataset.json";
   a.click();
+  console.log("Dataset downloaded successfully.");
 }
+
+// =================== Loading labels ===================
+fetch('./labels.json')
+  .then(response => response.json())
+  .then(data => labels = data)
+  .catch(err => console.error("Failed to load labels:", err));
 
 // =================== Prediction Setup ===================
 let model = null;
 let PredictSequence = [];
 let predictedGesture = '';
-const labels = ['I', 'fine']; // Customize for your labels
+let labels = null; // Customize for your labels
+let MODEL_URL = "./model_tfjs/model.json"; // Path to your model
 
 async function loadModel() {
   try {
-    model = await tf.loadLayersModel("./model_tfjs/model.json");
+    model = await tf.loadLayersModel(MODEL_URL);
     console.log("Model loaded!");
   } catch (err) {
     console.error("Model failed to load:", err);
@@ -148,8 +156,12 @@ async function predictGesture(sequence) {
   try {
     const inputTensor = tf.tensor(sequence).reshape([1, FRAME_LIMIT, 63]);
     const prediction = model.predict(inputTensor);
+
+    // Checking the softmax probabilities
     const predictionData = await prediction.data();
-    const predictedIndex = prediction.argMax(-1).dataSync()[0];
+    console.log("Prediction data:", Array.from(predictionData));
+
+    const predictedIndex = (await prediction.argMax(-1).data())[0];
 
     const newGesture = labels[predictedIndex];
     if (newGesture !== predictedGesture) {
