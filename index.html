@@ -7,8 +7,8 @@
 </head>
 <body>
     <div class="container">
-        <video class="input_video" autoplay playsinline style=""></video> <!-- This element is acts as an input -->
-        <canvas class="output_canvas"  width="640" height="480"></canvas> <!-- This element renders the video element with annotations with it -->
+        <video class="input_video video_box" autoplay playsinline style=""></video> <!-- This element is acts as an input -->
+        <!-- <canvas class="output_canvas video_box"></canvas> This element renders the video element with annotations with it -->
         <div class="displayMode">MODE: PREDICT</div>
         <!-- These buttons are for enable and stop functionailty of the webcam -->
         <div class="buttons">
@@ -23,22 +23,28 @@
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js"></script>
-    <!-- <script src="https://cdn.jsdelivr.net/npm/ml5@0.12.2/dist/ml5.min.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0/dist/tf.min.js"></script>
-    <script src="main.js"></script>
+    <script src="main2.js"></script>
 </body>
 <style>
     body {
         background-color: black;
     }
-    .output_canvas {
-	  	border: 2px solid red;
+    .video_box {
+        width: 640px;
+        height: 480px;
+        border: 2px solid white;
+        margin: 10px auto;
     }
     .displayMode {
 	  	border: 2px solid red;
         color: white;
 		width: 150px;
 	  	margin: 5px 0;
+        padding: 2px;
+	}
+    .gestureText {
+		width: 225px;
 	}
 	.buttons {
 		display: flex;

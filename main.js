@@ -1,9 +1,9 @@
 // =================== HTML Elements ===================
-const body = document.querySelector("body");
 const enableBtn = document.getElementById('enable');
 const disableBtn = document.getElementById('disable');
 const captureBtn = document.getElementById('capture');
 const downloadBtn = document.getElementById('download');
+
 const videoElement = document.querySelector('.input_video');
 const canvasElement = document.querySelector('.output_canvas');
 const canvasCtx = canvasElement.getContext('2d');
@@ -44,7 +44,6 @@ function enableCam() {
         disableBtn.disabled = false;
         captureBtn.disabled = false;
         downloadBtn.disabled = false;
-
     } catch (error) {
         console.error('Failed to start webcam:', error);
         displayModeElement.textContent = `MODE: ERROR`;
@@ -219,7 +218,7 @@ hands.onResults((results) => {
 });
 
 // =================== Keyboard Controls ===================
-body.addEventListener("keypress", (e) => {
+document.addEventListener("keypress", (e) => {
   switch (e.key) {
     case 'e': if (!enableBtn.disabled) enableCam(); break;
     case 'd': if (!disableBtn.disabled) disableCam(); break;
